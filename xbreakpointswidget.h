@@ -21,6 +21,9 @@
 #ifndef XBREAKPOINTSWIDGET_H
 #define XBREAKPOINTSWIDGET_H
 
+#include <QStandardItemModel>
+#include <QFuture>
+#include <QtConcurrent>
 #include "xshortcutswidget.h"
 #include "xinfodb.h"
 
@@ -35,6 +38,7 @@ class XBreakPointsWidget : public XShortcutsWidget
     enum HEADER_COLUMN
     {
         HEADER_COLUMN_ADDRESS=0,
+        __HEADER_COLUMN_size
     };
 
 public:
@@ -45,8 +49,13 @@ public:
     void reload();
 
 private:
+    void deleteOldModel();
+
+private:
     Ui::XBreakPointsWidget *ui;
     XInfoDB *g_pXInfoDB;
+    QStandardItemModel *g_pModel;
+    QStandardItemModel *g_pOldModel;
 };
 
 #endif // XBREAKPOINTSWIDGET_H

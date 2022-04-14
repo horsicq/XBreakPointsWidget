@@ -28,6 +28,8 @@ XBreakPointsWidget::XBreakPointsWidget(QWidget *pParent) :
     ui->setupUi(this);
 
     g_pXInfoDB=nullptr;
+    g_pModel=nullptr;
+    g_pOldModel=nullptr;
 }
 
 XBreakPointsWidget::~XBreakPointsWidget()
@@ -49,6 +51,54 @@ void XBreakPointsWidget::reload()
 {
     if(g_pXInfoDB)
     {
+        g_pOldModel=g_pModel;
+
+        XBinary::MODE modeAddress=XBinary::MODE_32;
+
+        if(sizeof(void *)==8)
+        {
+            modeAddress=XBinary::MODE_64;
+        }
+        else
+        {
+            modeAddress=XBinary::MODE_32;
+        }
+
+        QMap<quint64,XInfoDB::BREAKPOINT> *pMapSoftwareBP=g_pXInfoDB->getSoftwareBreakpoints();
+
+        qint32 nNumberOfRecords=pMapSoftwareBP->count();
+
+        g_pModel=new QStandardItemModel(nNumberOfRecords,__HEADER_COLUMN_size);
+
+        g_pModel->setHeaderData(HEADER_COLUMN_ADDRESS,Qt::Horizontal,tr("Address"));
         // TODO
+
+//        for(qint32 i=0;i<nNumberOfRecords;i++)
+//        {
+//            QStandardItem *pItemAddress=new QStandardItem;
+//            pItemAddress->setText(XBinary::valueToHex(modeAddress,pListModules->at(i).nAddress));
+//            pItemAddress->setData(pListModules->at(i).nAddress,Qt::UserRole+USERROLE_ADDRESS);
+//            pItemAddress->setData(pListModules->at(i).nSize,Qt::UserRole+USERROLE_SIZE);
+//            pItemAddress->setTextAlignment(Qt::AlignRight|Qt::AlignVCenter);
+//            g_pModel->setItem(i,HEADER_COLUMN_ADDRESS,pItemAddress);
+//        }
+
+//        ui->tableViewModules->setModel(g_pModel);
+
+//        #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+//            QFuture<void> future=QtConcurrent::run(&XBreakPointsWidget::deleteOldModel,this);
+//        #else
+//            QFuture<void> future=QtConcurrent::run(this,&XBreakPointsWidget::deleteOldModel);
+//        #endif
+    }
+}
+
+void XBreakPointsWidget::deleteOldModel()
+{
+    if(g_pOldModel)
+    {
+        delete g_pOldModel;
+
+        g_pOldModel=0;
     }
 }
