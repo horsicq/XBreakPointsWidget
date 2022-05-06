@@ -45,7 +45,7 @@ public:
     explicit XBreakPointsWidget(QWidget *pParent=nullptr);
     ~XBreakPointsWidget();
 
-    void setData(XInfoDB *pXInfoDB,bool bReload=true);
+    void setXInfoDB(XInfoDB *pXInfoDB,bool bReload=true);
     void reload();
 
 private:

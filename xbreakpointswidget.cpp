@@ -37,7 +37,7 @@ XBreakPointsWidget::~XBreakPointsWidget()
     delete ui;
 }
 
-void XBreakPointsWidget::setData(XInfoDB *pXInfoDB,bool bReload)
+void XBreakPointsWidget::setXInfoDB(XInfoDB *pXInfoDB,bool bReload)
 {
     g_pXInfoDB=pXInfoDB;
 
@@ -64,32 +64,31 @@ void XBreakPointsWidget::reload()
             modeAddress=XBinary::MODE_32;
         }
 
-        QMap<quint64,XInfoDB::BREAKPOINT> *pMapSoftwareBP=g_pXInfoDB->getSoftwareBreakpoints();
+        QList<XInfoDB::BREAKPOINT> *pListBreakpoints=g_pXInfoDB->getBreakpoints();
 
-        qint32 nNumberOfRecords=pMapSoftwareBP->count();
+        qint32 nNumberOfRecords=pListBreakpoints->count();
 
         g_pModel=new QStandardItemModel(nNumberOfRecords,__HEADER_COLUMN_size);
 
         g_pModel->setHeaderData(HEADER_COLUMN_ADDRESS,Qt::Horizontal,tr("Address"));
-        // TODO
 
-//        for(qint32 i=0;i<nNumberOfRecords;i++)
-//        {
-//            QStandardItem *pItemAddress=new QStandardItem;
-//            pItemAddress->setText(XBinary::valueToHex(modeAddress,pListModules->at(i).nAddress));
+        for(qint32 i=0;i<nNumberOfRecords;i++)
+        {
+            QStandardItem *pItemAddress=new QStandardItem;
+            pItemAddress->setText(XBinary::valueToHex(modeAddress,pListBreakpoints->at(i).nAddress));
 //            pItemAddress->setData(pListModules->at(i).nAddress,Qt::UserRole+USERROLE_ADDRESS);
 //            pItemAddress->setData(pListModules->at(i).nSize,Qt::UserRole+USERROLE_SIZE);
-//            pItemAddress->setTextAlignment(Qt::AlignRight|Qt::AlignVCenter);
-//            g_pModel->setItem(i,HEADER_COLUMN_ADDRESS,pItemAddress);
-//        }
+            pItemAddress->setTextAlignment(Qt::AlignRight|Qt::AlignVCenter);
+            g_pModel->setItem(i,HEADER_COLUMN_ADDRESS,pItemAddress);
+        }
 
-//        ui->tableViewModules->setModel(g_pModel);
+        ui->tableViewBreakPoints->setModel(g_pModel);
 
-//        #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-//            QFuture<void> future=QtConcurrent::run(&XBreakPointsWidget::deleteOldModel,this);
-//        #else
-//            QFuture<void> future=QtConcurrent::run(this,&XBreakPointsWidget::deleteOldModel);
-//        #endif
+        #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+            QFuture<void> future=QtConcurrent::run(&XBreakPointsWidget::deleteOldModel,this);
+        #else
+            QFuture<void> future=QtConcurrent::run(this,&XBreakPointsWidget::deleteOldModel);
+        #endif
     }
 }
 
