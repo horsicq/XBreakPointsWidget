@@ -53,16 +53,7 @@ void XBreakPointsWidget::reload()
     {
         g_pOldModel=g_pModel;
 
-        XBinary::MODE modeAddress=XBinary::MODE_32;
-
-        if(sizeof(void *)==8)
-        {
-            modeAddress=XBinary::MODE_64;
-        }
-        else
-        {
-            modeAddress=XBinary::MODE_32;
-        }
+        XBinary::MODE modeAddress=XBinary::getModeOS();
 
         QList<XInfoDB::BREAKPOINT> *pListBreakpoints=g_pXInfoDB->getBreakpoints();
 
