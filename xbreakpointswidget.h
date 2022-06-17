@@ -38,6 +38,7 @@ class XBreakPointsWidget : public XShortcutsWidget
     enum HEADER_COLUMN
     {
         HEADER_COLUMN_ADDRESS=0,
+        HEADER_COLUMN_TYPE,
         __HEADER_COLUMN_size
     };
 

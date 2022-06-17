@@ -53,8 +53,6 @@ void XBreakPointsWidget::reload()
     {
         g_pOldModel=g_pModel;
 
-        XBinary::MODE modeAddress=XBinary::getModeOS();
-
         QList<XInfoDB::BREAKPOINT> *pListBreakpoints=g_pXInfoDB->getBreakpoints();
 
         qint32 nNumberOfRecords=pListBreakpoints->count();
@@ -62,15 +60,21 @@ void XBreakPointsWidget::reload()
         g_pModel=new QStandardItemModel(nNumberOfRecords,__HEADER_COLUMN_size);
 
         g_pModel->setHeaderData(HEADER_COLUMN_ADDRESS,Qt::Horizontal,tr("Address"));
+        g_pModel->setHeaderData(HEADER_COLUMN_TYPE,Qt::Horizontal,tr("Type"));
 
         for(qint32 i=0;i<nNumberOfRecords;i++)
         {
             QStandardItem *pItemAddress=new QStandardItem;
-            pItemAddress->setText(XBinary::valueToHex(modeAddress,pListBreakpoints->at(i).nAddress));
+            pItemAddress->setText(XBinary::valueToHexOS(pListBreakpoints->at(i).nAddress));
 //            pItemAddress->setData(pListModules->at(i).nAddress,Qt::UserRole+USERROLE_ADDRESS);
 //            pItemAddress->setData(pListModules->at(i).nSize,Qt::UserRole+USERROLE_SIZE);
             pItemAddress->setTextAlignment(Qt::AlignRight|Qt::AlignVCenter);
             g_pModel->setItem(i,HEADER_COLUMN_ADDRESS,pItemAddress);
+
+            QStandardItem *pItemType=new QStandardItem;
+//            pItemType->setText("TODO");
+            pItemType->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+            g_pModel->setItem(i,HEADER_COLUMN_TYPE,pItemType);
         }
 
         ui->tableViewBreakPoints->setModel(g_pModel);
