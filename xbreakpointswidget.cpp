@@ -79,20 +79,6 @@ void XBreakPointsWidget::reload()
 
         ui->tableViewBreakPoints->setModel(g_pModel);
 
-        #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-            QFuture<void> future=QtConcurrent::run(&XBreakPointsWidget::deleteOldModel,this);
-        #else
-            QFuture<void> future=QtConcurrent::run(this,&XBreakPointsWidget::deleteOldModel);
-        #endif
-    }
-}
-
-void XBreakPointsWidget::deleteOldModel()
-{
-    if(g_pOldModel)
-    {
-        delete g_pOldModel;
-
-        g_pOldModel=0;
+        deleteOldModel(&g_pOldModel);
     }
 }

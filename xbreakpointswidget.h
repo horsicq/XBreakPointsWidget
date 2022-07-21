@@ -22,8 +22,6 @@
 #define XBREAKPOINTSWIDGET_H
 
 #include <QStandardItemModel>
-#include <QFuture>
-#include <QtConcurrent>
 #include "xshortcutswidget.h"
 #include "xinfodb.h"
 
@@ -48,9 +46,6 @@ public:
 
     void setXInfoDB(XInfoDB *pXInfoDB,bool bReload=true);
     void reload();
-
-private:
-    void deleteOldModel();
 
 private:
     Ui::XBreakPointsWidget *ui;
