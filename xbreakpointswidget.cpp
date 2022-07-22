@@ -79,6 +79,6 @@ void XBreakPointsWidget::reload()
 
         ui->tableViewBreakPoints->setModel(g_pModel);
 
-        deleteOldModel(&g_pOldModel);
+        deleteOldStandardModel(&g_pOldModel);
     }
 }
