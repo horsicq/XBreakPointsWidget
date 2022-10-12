@@ -1,14 +1,14 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
-FORMS += \
-    $$PWD/xbreakpointswidget.ui
-
 HEADERS += \
     $$PWD/xbreakpointswidget.h
 
 SOURCES += \
     $$PWD/xbreakpointswidget.cpp
+
+FORMS += \
+    $$PWD/xbreakpointswidget.ui
 
 DISTFILES += \
     $$PWD/LICENSE \
