@@ -22,29 +22,28 @@
 #define XBREAKPOINTSWIDGET_H
 
 #include <QStandardItemModel>
-#include "xshortcutswidget.h"
+
 #include "xinfodb.h"
+#include "xshortcutswidget.h"
 
 namespace Ui {
 class XBreakPointsWidget;
 }
 
-class XBreakPointsWidget : public XShortcutsWidget
-{
+class XBreakPointsWidget : public XShortcutsWidget {
     Q_OBJECT
 
-    enum HEADER_COLUMN
-    {
-        HEADER_COLUMN_ADDRESS=0,
+    enum HEADER_COLUMN {
+        HEADER_COLUMN_ADDRESS = 0,
         HEADER_COLUMN_TYPE,
         __HEADER_COLUMN_size
     };
 
 public:
-    explicit XBreakPointsWidget(QWidget *pParent=nullptr);
+    explicit XBreakPointsWidget(QWidget *pParent = nullptr);
     ~XBreakPointsWidget();
 
-    void setXInfoDB(XInfoDB *pXInfoDB,bool bReload=true);
+    void setXInfoDB(XInfoDB *pXInfoDB, bool bReload = true);
     void reload();
 
 private:
@@ -54,4 +53,4 @@ private:
     QStandardItemModel *g_pOldModel;
 };
 
-#endif // XBREAKPOINTSWIDGET_H
+#endif  // XBREAKPOINTSWIDGET_H
