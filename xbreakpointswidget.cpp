@@ -22,7 +22,8 @@
 
 #include "ui_xbreakpointswidget.h"
 
-XBreakPointsWidget::XBreakPointsWidget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::XBreakPointsWidget) {
+XBreakPointsWidget::XBreakPointsWidget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::XBreakPointsWidget)
+{
     ui->setupUi(this);
 
     g_pXInfoDB = nullptr;
@@ -30,11 +31,13 @@ XBreakPointsWidget::XBreakPointsWidget(QWidget *pParent) : XShortcutsWidget(pPar
     g_pOldModel = nullptr;
 }
 
-XBreakPointsWidget::~XBreakPointsWidget() {
+XBreakPointsWidget::~XBreakPointsWidget()
+{
     delete ui;
 }
 
-void XBreakPointsWidget::setXInfoDB(XInfoDB *pXInfoDB, bool bReload) {
+void XBreakPointsWidget::setXInfoDB(XInfoDB *pXInfoDB, bool bReload)
+{
     g_pXInfoDB = pXInfoDB;
 
     if (bReload) {
@@ -42,7 +45,8 @@ void XBreakPointsWidget::setXInfoDB(XInfoDB *pXInfoDB, bool bReload) {
     }
 }
 
-void XBreakPointsWidget::reload() {
+void XBreakPointsWidget::reload()
+{
     if (g_pXInfoDB) {
         g_pOldModel = g_pModel;
 
