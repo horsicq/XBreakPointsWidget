@@ -22,8 +22,7 @@
 
 #include "ui_xbreakpointswidget.h"
 
-XBreakPointsWidget::XBreakPointsWidget(QWidget *pParent)
-    : XShortcutsWidget(pParent), ui(new Ui::XBreakPointsWidget)
+XBreakPointsWidget::XBreakPointsWidget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::XBreakPointsWidget)
 {
     ui->setupUi(this);
 
