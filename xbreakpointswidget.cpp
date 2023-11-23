@@ -57,20 +57,56 @@ void XBreakPointsWidget::reload()
         g_pModel = new QStandardItemModel(nNumberOfRecords, __HEADER_COLUMN_size);
 
         g_pModel->setHeaderData(HEADER_COLUMN_ADDRESS, Qt::Horizontal, tr("Address"));
+        g_pModel->setHeaderData(HEADER_COLUMN_SIZE, Qt::Horizontal, tr("Size"));
+        g_pModel->setHeaderData(HEADER_COLUMN_THREAD, Qt::Horizontal, tr("Thread"));
         g_pModel->setHeaderData(HEADER_COLUMN_TYPE, Qt::Horizontal, tr("Type"));
+        g_pModel->setHeaderData(HEADER_COLUMN_INFO, Qt::Horizontal, tr("Info"));
+        g_pModel->setHeaderData(HEADER_COLUMN_COUNT, Qt::Horizontal, tr("Count"));
+        g_pModel->setHeaderData(HEADER_COLUMN_NOTE, Qt::Horizontal, tr("Note"));
 
         for (qint32 i = 0; i < nNumberOfRecords; i++) {
-            QStandardItem *pItemAddress = new QStandardItem;
-            pItemAddress->setText(XBinary::valueToHexOS(pListBreakpoints->at(i).nAddress));
-            //            pItemAddress->setData(pListModules->at(i).nAddress,Qt::UserRole+USERROLE_ADDRESS);
-            //            pItemAddress->setData(pListModules->at(i).nSize,Qt::UserRole+USERROLE_SIZE);
-            pItemAddress->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-            g_pModel->setItem(i, HEADER_COLUMN_ADDRESS, pItemAddress);
-
-            QStandardItem *pItemType = new QStandardItem;
-            //            pItemType->setText("TODO");
-            pItemType->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-            g_pModel->setItem(i, HEADER_COLUMN_TYPE, pItemType);
+            {
+                QStandardItem *pItem = new QStandardItem;
+                pItem->setText(XBinary::valueToHexOS(pListBreakpoints->at(i).nAddress));
+                pItem->setData(pListBreakpoints->at(i).sUUID,Qt::UserRole+1);
+                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                g_pModel->setItem(i, HEADER_COLUMN_ADDRESS, pItem);
+            }
+            {
+                QStandardItem *pItem = new QStandardItem;
+                pItem->setText(XBinary::valueToHexEx(pListBreakpoints->at(i).nSize));
+                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                g_pModel->setItem(i, HEADER_COLUMN_SIZE, pItem);
+            }
+            {
+                QStandardItem *pItem = new QStandardItem;
+                pItem->setText(XBinary::valueToHexEx(pListBreakpoints->at(i).nThreadID));
+                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                g_pModel->setItem(i, HEADER_COLUMN_THREAD, pItem);
+            }
+            {
+                QStandardItem *pItem = new QStandardItem;
+                pItem->setText(XBinary::valueToHexEx(pListBreakpoints->at(i).bpType));
+                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                g_pModel->setItem(i, HEADER_COLUMN_TYPE, pItem);
+            }
+            {
+                QStandardItem *pItem = new QStandardItem;
+                pItem->setText(XBinary::valueToHexEx(pListBreakpoints->at(i).bpInfo));
+                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                g_pModel->setItem(i, HEADER_COLUMN_INFO, pItem);
+            }
+            {
+                QStandardItem *pItem = new QStandardItem;
+                pItem->setText(XBinary::valueToHex(pListBreakpoints->at(i).nCount));
+                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                g_pModel->setItem(i, HEADER_COLUMN_COUNT, pItem);
+            }
+            {
+                QStandardItem *pItem = new QStandardItem;
+                pItem->setText(pListBreakpoints->at(i).sNote);
+                g_pModel->setItem(i, HEADER_COLUMN_NOTE, pItem);
+            }
         }
 
         ui->tableViewBreakPoints->setModel(g_pModel);
