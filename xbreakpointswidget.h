@@ -39,7 +39,7 @@ class XBreakPointsWidget : public XShortcutsWidget {
         HEADER_COLUMN_THREAD,
         HEADER_COLUMN_TYPE,
         HEADER_COLUMN_INFO,
-        HEADER_COLUMN_COUNT,
+        HEADER_COLUMN_ONESHOT,
         HEADER_COLUMN_NOTE,
         __HEADER_COLUMN_size
     };

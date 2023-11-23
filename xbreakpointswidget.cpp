@@ -61,7 +61,7 @@ void XBreakPointsWidget::reload()
         g_pModel->setHeaderData(HEADER_COLUMN_THREAD, Qt::Horizontal, tr("Thread"));
         g_pModel->setHeaderData(HEADER_COLUMN_TYPE, Qt::Horizontal, tr("Type"));
         g_pModel->setHeaderData(HEADER_COLUMN_INFO, Qt::Horizontal, tr("Info"));
-        g_pModel->setHeaderData(HEADER_COLUMN_COUNT, Qt::Horizontal, tr("Count"));
+        g_pModel->setHeaderData(HEADER_COLUMN_ONESHOT, Qt::Horizontal, tr("One shot"));
         g_pModel->setHeaderData(HEADER_COLUMN_NOTE, Qt::Horizontal, tr("Note"));
 
         for (qint32 i = 0; i < nNumberOfRecords; i++) {
@@ -98,9 +98,8 @@ void XBreakPointsWidget::reload()
             }
             {
                 QStandardItem *pItem = new QStandardItem;
-                pItem->setText(XBinary::valueToHex(pListBreakpoints->at(i).nCount));
-                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-                g_pModel->setItem(i, HEADER_COLUMN_COUNT, pItem);
+                pItem->setText(XBinary::boolToString(pListBreakpoints->at(i).bOneShot));
+                g_pModel->setItem(i, HEADER_COLUMN_ONESHOT, pItem);
             }
             {
                 QStandardItem *pItem = new QStandardItem;
