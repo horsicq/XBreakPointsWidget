@@ -47,6 +47,9 @@ void XBreakPointsWidget::setXInfoDB(XInfoDB *pXInfoDB, bool bReload)
 
 void XBreakPointsWidget::reload()
 {
+    // TODO Colors
+    // TODO Edit
+    // TODO disabled -> grey
     if (g_pXInfoDB) {
         g_pOldModel = g_pModel;
 
@@ -86,14 +89,12 @@ void XBreakPointsWidget::reload()
             }
             {
                 QStandardItem *pItem = new QStandardItem;
-                pItem->setText(XBinary::valueToHexEx(pListBreakpoints->at(i).bpType));
-                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                pItem->setText(XInfoDB::bptToString(pListBreakpoints->at(i).bpType));
                 g_pModel->setItem(i, HEADER_COLUMN_TYPE, pItem);
             }
             {
                 QStandardItem *pItem = new QStandardItem;
-                pItem->setText(XBinary::valueToHexEx(pListBreakpoints->at(i).bpInfo));
-                pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                pItem->setText(XInfoDB::bpiToString(pListBreakpoints->at(i).bpInfo));
                 g_pModel->setItem(i, HEADER_COLUMN_INFO, pItem);
             }
             {
