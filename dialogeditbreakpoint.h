@@ -7,8 +7,7 @@ namespace Ui {
 class DialogEditBreakpoint;
 }
 
-class DialogEditBreakpoint : public QDialog
-{
+class DialogEditBreakpoint : public QDialog {
     Q_OBJECT
 
 public:
@@ -19,4 +18,4 @@ private:
     Ui::DialogEditBreakpoint *ui;
 };
 
-#endif // DIALOGEDITBREAKPOINT_H
+#endif  // DIALOGEDITBREAKPOINT_H

@@ -71,7 +71,7 @@ void XBreakPointsWidget::reload()
             {
                 QStandardItem *pItem = new QStandardItem;
                 pItem->setText(XBinary::valueToHexOS(pListBreakpoints->at(i).nAddress));
-                pItem->setData(pListBreakpoints->at(i).sUUID,Qt::UserRole+1);
+                pItem->setData(pListBreakpoints->at(i).sUUID, Qt::UserRole + 1);
                 pItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
                 g_pModel->setItem(i, HEADER_COLUMN_ADDRESS, pItem);
             }
