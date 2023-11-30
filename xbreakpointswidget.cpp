@@ -104,7 +104,7 @@ void XBreakPointsWidget::reload()
             }
             {
                 QStandardItem *pItem = new QStandardItem;
-                pItem->setText(pListBreakpoints->at(i).sNote);
+                pItem->setText(pListBreakpoints->at(i).vInfo.toString());
                 g_pModel->setItem(i, HEADER_COLUMN_NOTE, pItem);
             }
         }
