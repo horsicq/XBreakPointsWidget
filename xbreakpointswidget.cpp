@@ -114,3 +114,10 @@ void XBreakPointsWidget::reload()
         deleteOldStandardModel(&g_pOldModel);
     }
 }
+
+void XBreakPointsWidget::on_tableViewBreakPoints_customContextMenuRequested(const QPoint &pos)
+{
+    // TODO edit
+    // TODO remove
+}
+
