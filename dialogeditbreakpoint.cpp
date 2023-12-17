@@ -78,4 +78,3 @@ void DialogEditBreakpoint::on_pushButtonOK_clicked()
 
     accept();
 }
-

@@ -120,4 +120,3 @@ void XBreakPointsWidget::on_tableViewBreakPoints_customContextMenuRequested(cons
     // TODO edit
     // TODO remove
 }
-

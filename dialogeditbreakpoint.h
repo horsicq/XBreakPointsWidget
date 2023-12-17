@@ -38,7 +38,6 @@ public:
     void setData(XInfoDB::BREAKPOINT breakPoint);
     XInfoDB::BREAKPOINT getBreakpoint();
 
-
 private slots:
     void on_pushButtonCancel_clicked();
     void on_pushButtonOK_clicked();
