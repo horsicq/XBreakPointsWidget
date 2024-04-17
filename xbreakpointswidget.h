@@ -58,7 +58,6 @@ private:
     Ui::XBreakPointsWidget *ui;
     XInfoDB *g_pXInfoDB;
     QStandardItemModel *g_pModel;
-    QStandardItemModel *g_pOldModel;
 };
 
 #endif  // XBREAKPOINTSWIDGET_H

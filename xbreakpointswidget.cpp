@@ -28,7 +28,6 @@ XBreakPointsWidget::XBreakPointsWidget(QWidget *pParent) : XShortcutsWidget(pPar
 
     g_pXInfoDB = nullptr;
     g_pModel = nullptr;
-    g_pOldModel = nullptr;
 }
 
 XBreakPointsWidget::~XBreakPointsWidget()
@@ -51,7 +50,7 @@ void XBreakPointsWidget::reload()
     // TODO Edit
     // TODO disabled -> grey
     if (g_pXInfoDB) {
-        g_pOldModel = g_pModel;
+        QStandardItemModel *pOldModel = g_pModel;
 
         QList<XInfoDB::BREAKPOINT> *pListBreakpoints = g_pXInfoDB->getBreakpoints();
 
@@ -111,7 +110,7 @@ void XBreakPointsWidget::reload()
 
         ui->tableViewBreakPoints->setModel(g_pModel);
 
-        deleteOldStandardModel(&g_pOldModel);
+        deleteOldStandardModel(&pOldModel);
     }
 }
 
