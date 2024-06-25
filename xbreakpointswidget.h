@@ -51,8 +51,13 @@ public:
     void setXInfoDB(XInfoDB *pXInfoDB, bool bReload = true);
     void reload();
 
+    virtual void adjustView() {}
+
 private slots:
     void on_tableViewBreakPoints_customContextMenuRequested(const QPoint &pos);
+
+protected:
+    virtual void registerShortcuts(bool bState) { Q_UNUSED(bState) }
 
 private:
     Ui::XBreakPointsWidget *ui;
