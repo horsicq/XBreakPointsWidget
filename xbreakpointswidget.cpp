@@ -110,7 +110,7 @@ void XBreakPointsWidget::reload()
 
         ui->tableViewBreakPoints->setModel(g_pModel);
 
-        deleteOldStandardModel(&pOldModel);
+        // deleteOldAbstractModel(&pOldModel);
     }
 }
 
